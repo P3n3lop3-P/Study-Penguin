@@ -26,6 +26,45 @@
     .penguin {
       font-size: 72px;
     }
+
+    .rose {
+      width: 28px;
+      height: 28px;
+      vertical-align: middle;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+      text-align: left;
+    }
+
+    input,
+    button {
+      font: inherit;
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    input {
+      min-width: 0;
+      border: 1px solid #dfb5c4;
+      background: #fff;
+      color: #701d3e;
+    }
+
+    button {
+      margin-top: 8px;
+      border: none;
+      background: #701d3e;
+      color: #fffaf5;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #923454;
+    }
   </style>
 </head>
 
@@ -33,9 +72,81 @@
   <main>
     <div class="penguin">🐧</div>
     <h1>Study Penguin</h1>
-    <p>A little focus, a little flourish 🌸</p>
+
+    <p>
+      A little focus, a little flourish
+      <svg class="rose" viewBox="0 0 48 48" aria-hidden="true">
+        <path
+          d="M24 29v16"
+          stroke="#66845c"
+          stroke-width="3"
+        />
+        <path
+          d="M24 39Q10 39 12 31Q23 30 24 39"
+          fill="#89a77c"
+        />
+        <path
+          d="M24 35Q37 35 37 27Q26 27 24 35"
+          fill="#66845c"
+        />
+        <path
+          d="M24 32C9 30 4 19 10 13C6 4 19 1 24 8C30 0 42 5 39 14C47 22 36 32 24 32Z"
+          fill="#e99ab3"
+        />
+        <path
+          d="M13 15C18 10 29 11 34 17C38 25 24 30 18 24C12 18 20 13 27 17C33 22 23 25 21 21"
+          fill="none"
+          stroke="#a83f66"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </p>
+
     <h2>Weekly goal: 10 hours</h2>
-    <p>Your study tracker is growing here.</p>
+
+    <form id="study-form">
+      <label for="study-date">Study date</label>
+      <input type="date" id="study-date" required>
+
+      <label for="start-time">Start time</label>
+      <input type="time" id="start-time" required>
+
+      <label for="end-time">End time</label>
+      <input type="time" id="end-time" required>
+
+      <button type="submit">
+        Add session
+        <svg class="rose" viewBox="0 0 48 48" aria-hidden="true">
+          <path
+            d="M24 29v16"
+            stroke="#66845c"
+            stroke-width="3"
+          />
+          <path
+            d="M24 39Q10 39 12 31Q23 30 24 39"
+            fill="#89a77c"
+          />
+          <path
+            d="M24 35Q37 35 37 27Q26 27 24 35"
+            fill="#66845c"
+          />
+          <path
+            d="M24 32C9 30 4 19 10 13C6 4 19 1 24 8C30 0 42 5 39 14C47 22 36 32 24 32Z"
+            fill="#e99ab3"
+          />
+          <path
+            d="M13 15C18 10 29 11 34 17C38 25 24 30 18 24C12 18 20 13 27 17C33 22 23 25 21 21"
+            fill="none"
+            stroke="#a83f66"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </form>
+
+    <p id="progress">Studied: 0 hours · Remaining: 10 hours</p>
   </main>
 </body>
 </html>
