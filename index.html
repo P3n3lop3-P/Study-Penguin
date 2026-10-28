@@ -3,92 +3,361 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#701d3e">
   <title>Study Penguin</title>
 
   <style>
+    :root {
+      --pink: #fce8ef;
+      --cream: #fffaf5;
+      --maroon: #701d3e;
+      --rose: #bb5279;
+      --border: #e5becd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #fce8ef;
-      color: #701d3e;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px 16px;
+      margin: 0;
+      padding: 32px 16px;
+      background:
+        radial-gradient(circle at 10% 10%, #ffffff80, transparent 35%),
+        radial-gradient(circle at 90% 80%, #edb9cc60, transparent 35%),
+        var(--pink);
+      color: var(--maroon);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
     }
 
     main {
-      background: #fffaf5;
-      max-width: 500px;
+      width: 100%;
+      max-width: 650px;
       margin: auto;
       padding: 32px;
-      border-radius: 24px;
-      box-shadow: 0 8px 30px #701d3e15;
+      border: 1px solid #ffffff;
+      border-radius: 28px;
+      background: var(--cream);
+      box-shadow: 0 12px 45px #701d3e12;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, serif;
+    }
+
+    h1 {
+      margin-bottom: 4px;
+      font-size: clamp(2rem, 7vw, 3rem);
+    }
+
+    h2 {
+      font-size: 1.45rem;
     }
 
     .penguin {
-      font-size: 72px;
+      font-size: 76px;
+      line-height: 1.3;
+    }
+
+    .subtitle, .hint {
+      font-size: 0.9rem;
+      color: #85546a;
     }
 
     .rose {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
       vertical-align: middle;
     }
 
-    .affirmation-area {
-      min-height: 80px;
+    .flower-border {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .flower-border .rose:nth-child(odd) {
+      transform: rotate(-15deg);
+    }
+
+    .flower-border .rose:nth-child(even) {
+      transform: rotate(15deg);
+    }
+
+    .affirmation-box {
+      margin: 20px 0;
+      padding: 16px;
+      border-radius: 18px;
+      background: #f9e1eb;
+    }
+
+    .affirmation-line {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
+      min-height: 75px;
+      margin: 0;
     }
 
-    .affirmation-area .rose {
-      flex-shrink: 0;
+    #affirmation {
+      font-family: Georgia, serif;
+      font-size: 1.12rem;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .summary {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #ffffff80;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .stat {
+      padding: 14px 8px;
+      border-radius: 14px;
+      background: var(--pink);
+      text-align: center;
+    }
+
+    .stat span {
+      display: block;
+      font-size: 0.85rem;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.35rem;
+    }
+
+    progress {
+      display: block;
+      width: 100%;
+      height: 16px;
+      overflow: hidden;
+      border: none;
+      border-radius: 20px;
+      background: #f0d7e1;
+      accent-color: var(--rose);
+    }
+
+    progress::-webkit-progress-bar {
+      border-radius: 20px;
+      background: #f0d7e1;
+    }
+
+    progress::-webkit-progress-value {
+      border-radius: 20px;
+      background: var(--rose);
+    }
+
+    progress::-moz-progress-bar {
+      border-radius: 20px;
+      background: var(--rose);
+    }
+
+    #goal-message {
+      margin: 12px 0 0;
+      text-align: center;
     }
 
     form {
       display: grid;
       gap: 12px;
-      margin-top: 28px;
-      text-align: left;
     }
 
-    input,
-    button {
-      font: inherit;
-      padding: 12px;
+    .time-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    input, button {
+      min-height: 44px;
       border-radius: 12px;
+      font: inherit;
     }
 
     input {
+      width: 100%;
       min-width: 0;
-      border: 1px solid #dfb5c4;
+      padding: 11px;
+      border: 1px solid var(--border);
       background: #fff;
-      color: #701d3e;
+      color: var(--maroon);
     }
 
     button {
-      margin-top: 8px;
-      border: none;
-      background: #701d3e;
-      color: #fffaf5;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      background: var(--maroon);
+      color: var(--cream);
       cursor: pointer;
     }
 
     button:hover {
       background: #923454;
     }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    :focus-visible {
+      outline: 3px solid #c7658c;
+      outline-offset: 3px;
+    }
+
+    .secondary {
+      border-color: var(--border);
+      background: transparent;
+      color: var(--maroon);
+    }
+
+    .secondary:hover {
+      background: var(--pink);
+    }
+
+    .small-button {
+      min-height: 36px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+
+    #pause-affirmations {
+      margin-top: 8px;
+    }
+
+    .session-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .session-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--pink);
+    }
+
+    .session-info {
+      min-width: 0;
+    }
+
+    .session-info strong,
+    .session-info span {
+      display: block;
+    }
+
+    .session-info span {
+      font-size: 0.85rem;
+    }
+
+    .empty {
+      color: #85546a;
+      font-style: italic;
+    }
+
+    details {
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    details form {
+      margin-top: 14px;
+    }
+
+    #status {
+      min-height: 24px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    footer p {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 440px) {
+      body {
+        padding: 16px 10px;
+      }
+
+      main {
+        padding: 22px 16px;
+      }
+
+      .time-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .stat strong {
+        font-size: 1.15rem;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <main>
-    <div class="penguin">🐧</div>
-    <h1>Study Penguin</h1>
-
-    <p class="affirmation-area">
-      <span id="affirmation">I am worthy of love and respect.</span>
-
-      <svg class="rose" viewBox="0 0 48 48" aria-hidden="true">
+  <!-- Define the rose once so it can be reused around the page. -->
+  <svg
+    width="0"
+    height="0"
+    aria-hidden="true"
+    style="position: absolute; overflow: hidden;"
+  >
+    <defs>
+      <symbol id="pink-rose" viewBox="0 0 48 48">
         <path
           d="M24 29v16"
           stroke="#66845c"
@@ -113,57 +382,150 @@
           stroke-width="2.5"
           stroke-linecap="round"
         />
-      </svg>
-    </p>
+      </symbol>
+    </defs>
+  </svg>
 
-    <h2>Weekly goal: 10 hours</h2>
+  <main>
+    <header>
+      <div class="penguin" role="img" aria-label="Penguin">🐧</div>
+      <h1>Study Penguin</h1>
+      <p class="subtitle">A cozy little place to watch your progress grow.</p>
 
-    <form id="study-form">
-      <label for="study-date">Study date</label>
-      <input type="date" id="study-date" required>
+      <div class="flower-border" aria-hidden="true">
+        <svg class="rose"><use href="#pink-rose"></use></svg>
+        <svg class="rose"><use href="#pink-rose"></use></svg>
+        <svg class="rose"><use href="#pink-rose"></use></svg>
+      </div>
 
-      <label for="start-time">Start time</label>
-      <input type="time" id="start-time" required>
+      <div class="affirmation-box">
+        <p class="affirmation-line">
+          <svg class="rose" aria-hidden="true">
+            <use href="#pink-rose"></use>
+          </svg>
+          <span id="affirmation">I am worthy of love and respect.</span>
+        </p>
+        <button
+          id="pause-affirmations"
+          class="secondary small-button"
+          type="button"
+          aria-pressed="false"
+        >
+          Pause affirmations
+        </button>
+      </div>
+    </header>
 
-      <label for="end-time">End time</label>
-      <input type="time" id="end-time" required>
+    <section class="summary" aria-labelledby="weekly-heading">
+      <h2 id="weekly-heading">Your week in bloom</h2>
+      <p id="week-label" class="hint"></p>
+      <p>Weekly goal: <strong id="goal-label">10 hours</strong></p>
 
-      <button type="submit">
-        Add session
+      <div class="stats">
+        <div class="stat">
+          <span>Studied this week</span>
+          <strong id="total-time">0h 0m</strong>
+        </div>
+        <div class="stat">
+          <span>Left to your goal</span>
+          <strong id="remaining-time">10h 0m</strong>
+        </div>
+      </div>
 
-        <svg class="rose" viewBox="0 0 48 48" aria-hidden="true">
-          <path
-            d="M24 29v16"
-            stroke="#66845c"
-            stroke-width="3"
-          />
-          <path
-            d="M24 39Q10 39 12 31Q23 30 24 39"
-            fill="#89a77c"
-          />
-          <path
-            d="M24 35Q37 35 37 27Q26 27 24 35"
-            fill="#66845c"
-          />
-          <path
-            d="M24 32C9 30 4 19 10 13C6 4 19 1 24 8C30 0 42 5 39 14C47 22 36 32 24 32Z"
-            fill="#e99ab3"
-          />
-          <path
-            d="M13 15C18 10 29 11 34 17C38 25 24 30 18 24C12 18 20 13 27 17C33 22 23 25 21 21"
-            fill="none"
-            stroke="#a83f66"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          />
-        </svg>
+      <progress
+        id="goal-progress"
+        value="0"
+        max="600"
+        aria-label="Progress toward weekly study goal"
+      ></progress>
+
+      <p id="goal-message"></p>
+
+      <details>
+        <summary>Change weekly goal</summary>
+        <form id="goal-form">
+          <label for="goal-input">Hours per week</label>
+          <input
+            id="goal-input"
+            type="number"
+            min="0.25"
+            max="168"
+            step="0.25"
+            value="10"
+            required
+          >
+          <button type="submit">Save goal</button>
+        </form>
+        <p class="hint">
+          Your goal starts at 10 hours and stays the same unless you change it.
+        </p>
+      </details>
+    </section>
+
+    <section aria-labelledby="add-heading">
+      <h2 id="add-heading">Plant a little progress</h2>
+
+      <form id="study-form">
+        <div class="field">
+          <label for="study-date">Study date</label>
+          <input id="study-date" type="date" required>
+        </div>
+
+        <div class="time-fields">
+          <div class="field">
+            <label for="start-time">Start time</label>
+            <input id="start-time" type="time" step="60" required>
+          </div>
+
+          <div class="field">
+            <label for="end-time">End time</label>
+            <input id="end-time" type="time" step="60" required>
+          </div>
+        </div>
+
+        <p class="hint">
+          Enter a completed session. For study across midnight, add a
+          separate entry for each date.
+        </p>
+
+        <button type="submit">
+          Add session
+          <svg class="rose" aria-hidden="true">
+            <use href="#pink-rose"></use>
+          </svg>
+        </button>
+      </form>
+    </section>
+
+    <section aria-labelledby="sessions-heading">
+      <h2 id="sessions-heading">This week's sessions</h2>
+      <ul id="session-list" class="session-list"></ul>
+
+      <button id="reset-week" class="secondary" type="button">
+        Reset this week
       </button>
-    </form>
 
-    <p id="progress">Studied: 0 hours · Remaining: 10 hours</p>
+      <details>
+        <summary>Past sessions</summary>
+        <ul id="history-list" class="session-list"></ul>
+      </details>
+    </section>
+
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <footer>
+      <svg class="rose" aria-hidden="true">
+        <use href="#pink-rose"></use>
+      </svg>
+      <p class="hint">
+        Saved in this browser on this device.
+        Weeks run Monday–Sunday.
+      </p>
+    </footer>
   </main>
 
   <script>
+    // AFFIRMATIONS
     const affirmations = [
       "I am worthy of love and respect.",
       "I am enough just as I am.",
@@ -228,21 +590,430 @@
     ];
 
     const affirmationText = document.getElementById("affirmation");
-    let affirmationIndex = 0;
+    const pauseButton = document.getElementById("pause-affirmations");
+    let affirmationIndex = Math.floor(Math.random() * affirmations.length);
+    let affirmationsPaused = false;
 
-    // Show the first affirmation when the page opens.
     affirmationText.textContent = affirmations[affirmationIndex];
 
-    // Move to the next affirmation every eight seconds.
     setInterval(() => {
+      if (affirmationsPaused) return;
+
       affirmationIndex = (affirmationIndex + 1) % affirmations.length;
       affirmationText.textContent = affirmations[affirmationIndex];
     }, 8000);
 
-    // Prevent the unfinished study form from reloading the page.
-    document.getElementById("study-form").addEventListener("submit", (event) => {
-      event.preventDefault();
+    pauseButton.addEventListener("click", () => {
+      affirmationsPaused = !affirmationsPaused;
+      pauseButton.textContent = affirmationsPaused
+        ? "Resume affirmations"
+        : "Pause affirmations";
+      pauseButton.setAttribute("aria-pressed", String(affirmationsPaused));
     });
+
+    // STUDY TRACKER
+    const STORAGE_KEY = "study-penguin-sessions";
+
+    const studyForm = document.getElementById("study-form");
+    const dateInput = document.getElementById("study-date");
+    const startInput = document.getElementById("start-time");
+    const endInput = document.getElementById("end-time");
+    const goalForm = document.getElementById("goal-form");
+    const goalInput = document.getElementById("goal-input");
+    const resetButton = document.getElementById("reset-week");
+    const statusText = document.getElementById("status");
+
+    let sessions = [];
+    let goalMinutes = 600;
+    let storageReady = true;
+
+    function makeId() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2);
+    }
+
+    function dateKey(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function parseDate(value) {
+      return new Date(`${value}T12:00:00`);
+    }
+
+    function validDate(value) {
+      if (typeof value !== "string") return false;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+      const date = parseDate(value);
+      return !Number.isNaN(date.getTime()) && dateKey(date) === value;
+    }
+
+    function validTime(value) {
+      return typeof value === "string" &&
+        /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+    }
+
+    function timeToMinutes(value) {
+      const [hours, minutes] = value.split(":").map(Number);
+      return hours * 60 + minutes;
+    }
+
+    function formatDuration(minutes) {
+      return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+    }
+
+    function formatDate(value) {
+      return parseDate(value).toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      });
+    }
+
+    function formatTime(value) {
+      const date = new Date();
+      const [hours, minutes] = value.split(":").map(Number);
+      date.setHours(hours, minutes, 0, 0);
+      return date.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function weekBounds() {
+      const monday = new Date();
+      monday.setHours(0, 0, 0, 0);
+      monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
+
+      const nextMonday = new Date(monday);
+      nextMonday.setDate(nextMonday.getDate() + 7);
+
+      const sunday = new Date(monday);
+      sunday.setDate(sunday.getDate() + 6);
+
+      return {
+        start: dateKey(monday),
+        end: dateKey(nextMonday),
+        sunday: dateKey(sunday)
+      };
+    }
+
+    function isThisWeek(session, week) {
+      return session.date >= week.start && session.date < week.end;
+    }
+
+    function validSession(session) {
+      return session &&
+        validDate(session.date) &&
+        validTime(session.start) &&
+        validTime(session.end) &&
+        Number.isInteger(session.minutes) &&
+        session.minutes > 0 &&
+        session.minutes ===
+          timeToMinutes(session.end) - timeToMinutes(session.start);
+    }
+
+    // Load saved data, including sessions from our earlier version.
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+
+      if (raw !== null) {
+        const saved = JSON.parse(raw);
+        const savedSessions = Array.isArray(saved)
+          ? saved
+          : saved?.sessions;
+        const savedGoal = Array.isArray(saved)
+          ? 600
+          : saved?.goalMinutes;
+
+        if (
+          !Array.isArray(savedSessions) ||
+          !savedSessions.every(validSession) ||
+          !Number.isInteger(savedGoal) ||
+          savedGoal < 15 ||
+          savedGoal > 10080
+        ) {
+          throw new Error("Invalid saved data");
+        }
+
+        sessions = savedSessions.map(session => ({
+          ...session,
+          id: makeId()
+        }));
+        goalMinutes = savedGoal;
+      }
+    } catch {
+      storageReady = false;
+      statusText.textContent =
+        "Saved data could not be loaded. Changes are paused to protect it. " +
+        "Check that browser storage is allowed, then reload.";
+
+      studyForm.querySelector("button").disabled = true;
+      goalForm.querySelector("button").disabled = true;
+      resetButton.disabled = true;
+    }
+
+    // Save first, then update the app only if saving succeeded.
+    function saveData(nextSessions, nextGoal = goalMinutes) {
+      if (!storageReady) return false;
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          sessions: nextSessions,
+          goalMinutes: nextGoal
+        }));
+
+        sessions = nextSessions;
+        goalMinutes = nextGoal;
+        return true;
+      } catch {
+        statusText.textContent =
+          "Could not save. Browser storage may be full or blocked. " +
+          "Your change has not been applied.";
+        return false;
+      }
+    }
+
+    function renderSessions(listId, entries, emptyMessage) {
+      const list = document.getElementById(listId);
+      list.replaceChildren();
+
+      if (entries.length === 0) {
+        const item = document.createElement("li");
+        item.className = "empty";
+        item.textContent = emptyMessage;
+        list.appendChild(item);
+        return;
+      }
+
+      entries
+        .slice()
+        .sort((a, b) =>
+          `${b.date} ${b.start}`.localeCompare(`${a.date} ${a.start}`)
+        )
+        .forEach(session => {
+          const item = document.createElement("li");
+          const info = document.createElement("div");
+          info.className = "session-info";
+
+          const title = document.createElement("strong");
+          title.textContent =
+            `${formatDate(session.date)} · ${formatDuration(session.minutes)}`;
+
+          const times = document.createElement("span");
+          times.textContent =
+            `${formatTime(session.start)} – ${formatTime(session.end)}`;
+
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.className = "secondary small-button";
+          deleteButton.textContent = "Delete";
+          deleteButton.disabled = !storageReady;
+          deleteButton.setAttribute(
+            "aria-label",
+            `Delete session on ${formatDate(session.date)} ` +
+            `starting at ${formatTime(session.start)}`
+          );
+
+          deleteButton.addEventListener("click", () => {
+            if (!confirm("Delete this study session?")) return;
+
+            const remaining = sessions.filter(entry => entry.id !== session.id);
+
+            if (saveData(remaining)) {
+              render();
+              statusText.textContent = "Session deleted.";
+            }
+          });
+
+          info.append(title, times);
+          item.append(info, deleteButton);
+          list.appendChild(item);
+        });
+    }
+
+    function render() {
+      const week = weekBounds();
+      const weeklySessions = sessions.filter(session =>
+        isThisWeek(session, week)
+      );
+      const pastSessions = sessions.filter(session => session.date < week.start);
+      const total = weeklySessions.reduce(
+        (sum, session) => sum + session.minutes, 0
+      );
+      const remaining = Math.max(0, goalMinutes - total);
+      const progressBar = document.getElementById("goal-progress");
+
+      document.getElementById("week-label").textContent =
+        `${formatDate(week.start)} – ${formatDate(week.sunday)}`;
+
+      document.getElementById("goal-label").textContent =
+        `${goalMinutes / 60} hours`;
+
+      document.getElementById("total-time").textContent =
+        formatDuration(total);
+
+      document.getElementById("remaining-time").textContent =
+        formatDuration(remaining);
+
+      progressBar.max = goalMinutes;
+      progressBar.value = Math.min(total, goalMinutes);
+      progressBar.setAttribute(
+        "aria-valuetext",
+        `${formatDuration(total)} studied toward ${formatDuration(goalMinutes)}`
+      );
+
+      const message = document.getElementById("goal-message");
+
+      if (total > goalMinutes) {
+        message.textContent =
+          `Goal reached! ${formatDuration(total - goalMinutes)} extra. ` +
+          "Your penguin is proud of you! 🐧";
+      } else if (total === goalMinutes) {
+        message.textContent =
+          "You did it! Your weekly goal is in full bloom. 🐧";
+      } else if (total > 0) {
+        message.textContent = "Your effort is adding up, one session at a time.";
+      } else {
+        message.textContent = "A fresh week. Start with one little session.";
+      }
+
+      dateInput.max = dateKey(new Date());
+
+      renderSessions(
+        "session-list",
+        weeklySessions,
+        "No sessions yet this week. A little progress starts here."
+      );
+
+      renderSessions(
+        "history-list",
+        pastSessions,
+        "Your sessions from earlier weeks will appear here."
+      );
+    }
+
+    dateInput.value = dateKey(new Date());
+    goalInput.value = goalMinutes / 60;
+
+    studyForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const date = dateInput.value;
+      const start = startInput.value;
+      const end = endInput.value;
+
+      if (!validDate(date) || !validTime(start) || !validTime(end)) {
+        statusText.textContent = "Please enter a valid date and both times.";
+        return;
+      }
+
+      const today = dateKey(new Date());
+      const now = new Date();
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      if (
+        date > today ||
+        (date === today && timeToMinutes(end) > currentMinutes)
+      ) {
+        statusText.textContent =
+          "Please add the session after you have finished studying.";
+        return;
+      }
+
+      const minutes = timeToMinutes(end) - timeToMinutes(start);
+
+      if (minutes <= 0) {
+        statusText.textContent =
+          "End time must be after start time. " +
+          "Split sessions across midnight into separate dates.";
+        return;
+      }
+
+      const overlaps = sessions.some(session =>
+        session.date === date &&
+        timeToMinutes(start) < timeToMinutes(session.end) &&
+        timeToMinutes(end) > timeToMinutes(session.start)
+      );
+
+      if (overlaps) {
+        statusText.textContent =
+          "This overlaps a saved session. Check the times to avoid counting twice.";
+        return;
+      }
+
+      const session = {
+        id: makeId(),
+        date,
+        start,
+        end,
+        minutes
+      };
+
+      if (saveData([...sessions, session])) {
+        render();
+        startInput.value = "";
+        endInput.value = "";
+        statusText.textContent =
+          `Saved ${formatDuration(minutes)} for ${formatDate(date)}.`;
+      }
+    });
+
+    goalForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const hours = Number(goalInput.value);
+      const nextGoal = Math.round(hours * 60);
+
+      if (
+        !Number.isFinite(hours) ||
+        nextGoal < 15 ||
+        nextGoal > 10080 ||
+        nextGoal % 15 !== 0
+      ) {
+        statusText.textContent =
+          "Choose a goal from 0.25 to 168 hours, in quarter-hour steps.";
+        return;
+      }
+
+      if (saveData(sessions, nextGoal)) {
+        render();
+        statusText.textContent = `Weekly goal saved: ${hours} hours.`;
+      }
+    });
+
+    resetButton.addEventListener("click", () => {
+      const week = weekBounds();
+      const weeklySessions = sessions.filter(session =>
+        isThisWeek(session, week)
+      );
+
+      if (weeklySessions.length === 0) {
+        statusText.textContent = "There are no sessions to reset this week.";
+        return;
+      }
+
+      if (!confirm(
+        "Delete all of this week's sessions? " +
+        "Past weeks and your goal will be kept. This cannot be undone."
+      )) {
+        return;
+      }
+
+      const remaining = sessions.filter(session => !isThisWeek(session, week));
+
+      if (saveData(remaining)) {
+        render();
+        statusText.textContent = "This week has been reset. A fresh start!";
+      }
+    });
+
+    // Refresh the displayed week if the page stays open overnight.
+    setInterval(render, 60000);
+    window.addEventListener("focus", render);
+
+    render();
   </script>
 </body>
 </html>
