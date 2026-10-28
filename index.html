@@ -33,6 +33,18 @@
       vertical-align: middle;
     }
 
+    .affirmation-area {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .affirmation-area .rose {
+      flex-shrink: 0;
+    }
+
     form {
       display: grid;
       gap: 12px;
@@ -73,8 +85,9 @@
     <div class="penguin">🐧</div>
     <h1>Study Penguin</h1>
 
-    <p>
-      A little focus, a little flourish
+    <p class="affirmation-area">
+      <span id="affirmation">I am worthy of love and respect.</span>
+
       <svg class="rose" viewBox="0 0 48 48" aria-hidden="true">
         <path
           d="M24 29v16"
@@ -117,6 +130,7 @@
 
       <button type="submit">
         Add session
+
         <svg class="rose" viewBox="0 0 48 48" aria-hidden="true">
           <path
             d="M24 29v16"
@@ -148,5 +162,87 @@
 
     <p id="progress">Studied: 0 hours · Remaining: 10 hours</p>
   </main>
+
+  <script>
+    const affirmations = [
+      "I am worthy of love and respect.",
+      "I am enough just as I am.",
+      "I am confident in my abilities.",
+      "I believe in my potential.",
+      "I deserve good things in my life.",
+      "I am comfortable being myself.",
+      "I trust myself to make thoughtful decisions.",
+      "I am proud of my accomplishments, big and small.",
+      "I can find moments of joy in ordinary days.",
+      "I am resilient and can work through challenges.",
+      "My needs and well-being matter.",
+      "I can accept compliments with gratitude.",
+      "My worth does not depend on others' approval.",
+      "My perspective is valuable.",
+      "I treat myself with kindness and compassion.",
+      "I can feel my emotions and choose how I respond.",
+      "I give myself room to grow and change.",
+      "I am allowed to forgive myself.",
+      "I can give and receive love freely.",
+      "My past does not have to define my future.",
+      "I am allowed to move at my own pace.",
+      "I can make positive changes, one step at a time.",
+      "I have a voice in how my story unfolds.",
+      "I recognize and celebrate my strengths.",
+      "I deserve happiness without having to earn it.",
+      "Challenges can be opportunities to learn.",
+      "I deserve to take up space and express myself.",
+      "I can make choices that reflect my values.",
+      "I can ask for help when I need it.",
+      "I am grateful for who I am becoming.",
+      "I deserve kindness and empathy.",
+      "I can set goals that are meaningful to me.",
+      "I am worthy of love, even on my hardest days.",
+      "A setback does not erase my progress.",
+      "My personal growth is worth my time.",
+      "I have something meaningful to offer.",
+      "I am proud of how far I have come.",
+      "I am a work in progress, and that is okay.",
+      "I deserve moments of peace.",
+      "I deserve connections where I feel valued.",
+      "I can take steps toward a life I love.",
+      "I appreciate who I am today.",
+      "I can express myself with confidence.",
+      "My future holds possibilities I have not seen yet.",
+      "I deserve rest.",
+      "I can be present without having everything figured out.",
+      "I can be determined and gentle with myself.",
+      "I am learning to feel at home in my own skin.",
+      "I can set boundaries that protect my well-being.",
+      "I do not need to be perfect to be worthy.",
+      "My effort matters, even when progress feels slow.",
+      "One small step is still a step forward.",
+      "I am capable of learning difficult things.",
+      "I can take a break and begin again.",
+      "My worth is bigger than my productivity.",
+      "I can celebrate progress without comparing it to others.",
+      "I am allowed to be a beginner.",
+      "I can approach today with curiosity.",
+      "I deserve patience from myself.",
+      "I am building trust in myself, one day at a time."
+    ];
+
+    const affirmationText = document.getElementById("affirmation");
+    let affirmationIndex = 0;
+
+    // Show the first affirmation when the page opens.
+    affirmationText.textContent = affirmations[affirmationIndex];
+
+    // Move to the next affirmation every eight seconds.
+    setInterval(() => {
+      affirmationIndex = (affirmationIndex + 1) % affirmations.length;
+      affirmationText.textContent = affirmations[affirmationIndex];
+    }, 8000);
+
+    // Prevent the unfinished study form from reloading the page.
+    document.getElementById("study-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+  </script>
 </body>
 </html>
