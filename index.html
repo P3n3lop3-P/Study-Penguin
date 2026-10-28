@@ -36,7 +36,7 @@
       max-width: 650px;
       margin: auto;
       padding: 32px;
-      border: 1px solid #ffffff;
+      border: 1px solid #fff;
       border-radius: 28px;
       background: var(--cream);
       box-shadow: 0 12px 45px #701d3e12;
@@ -63,10 +63,83 @@
       font-size: 1.45rem;
     }
 
+    /* DANCING PENGUIN */
+
     .penguin {
-      font-size: 76px;
-      line-height: 1.3;
+      display: block;
+      width: 150px;
+      height: auto;
+      margin: 0 auto 8px;
+      overflow: visible;
     }
+
+    .penguin-dance {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: penguin-wiggle 1.2s ease-in-out infinite;
+    }
+
+    .flipper {
+      transform-box: fill-box;
+      transform-origin: center top;
+    }
+
+    .flipper-left {
+      animation: left-flap 0.6s ease-in-out infinite alternate;
+    }
+
+    .flipper-right {
+      animation: right-flap 0.6s ease-in-out infinite alternate;
+    }
+
+    .foot {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: foot-tap 0.6s ease-in-out infinite alternate;
+    }
+
+    .foot-right {
+      animation-delay: -0.6s;
+    }
+
+    @keyframes penguin-wiggle {
+      0%, 100% {
+        transform: translateY(0) rotate(-6deg);
+      }
+
+      25%, 75% {
+        transform: translateY(-6px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(0) rotate(6deg);
+      }
+    }
+
+    @keyframes left-flap {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(28deg); }
+    }
+
+    @keyframes right-flap {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-28deg); }
+    }
+
+    @keyframes foot-tap {
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(-4px) rotate(-8deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .penguin-dance,
+      .flipper,
+      .foot {
+        animation: none;
+      }
+    }
+
+    /* FLOWERS AND AFFIRMATIONS */
 
     .subtitle, .hint {
       font-size: 0.9rem;
@@ -115,6 +188,8 @@
       font-family: Georgia, serif;
       font-size: 1.12rem;
     }
+
+    /* TRACKER */
 
     section {
       margin-top: 26px;
@@ -349,7 +424,7 @@
 </head>
 
 <body>
-  <!-- Define the rose once so it can be reused around the page. -->
+  <!-- Reusable pink rose illustration -->
   <svg
     width="0"
     height="0"
@@ -388,9 +463,96 @@
 
   <main>
     <header>
-      <div class="penguin" role="img" aria-label="Penguin">🐧</div>
+      <!-- Illustrated dancing penguin -->
+      <svg
+        class="penguin"
+        viewBox="0 0 180 190"
+        role="img"
+        aria-labelledby="penguin-title"
+      >
+        <title id="penguin-title">
+          A cute dancing penguin with a pink bow
+        </title>
+
+        <ellipse
+          cx="90" cy="177" rx="43" ry="7"
+          fill="#e9c6d4"
+        />
+
+        <g class="penguin-dance">
+          <ellipse
+            class="foot foot-left"
+            cx="70" cy="167" rx="20" ry="9"
+            fill="#e8a16f"
+          />
+          <ellipse
+            class="foot foot-right"
+            cx="110" cy="167" rx="20" ry="9"
+            fill="#e8a16f"
+          />
+
+          <path
+            class="flipper flipper-left"
+            d="M53 82 C27 86 18 122 31 133 C42 140 55 113 61 99 Z"
+            fill="#62394f"
+          />
+          <path
+            class="flipper flipper-right"
+            d="M127 82 C153 86 162 122 149 133 C138 140 125 113 119 99 Z"
+            fill="#62394f"
+          />
+
+          <path
+            d="M90 24 C54 24 44 58 44 103
+               C44 148 60 169 90 169
+               C120 169 136 148 136 103
+               C136 58 126 24 90 24 Z"
+            fill="#62394f"
+          />
+          <path
+            d="M90 64 C76 47 58 67 58 101
+               C58 136 67 155 90 155
+               C113 155 122 136 122 101
+               C122 67 104 47 90 64 Z"
+            fill="#fff5eb"
+          />
+
+          <path
+            d="M66 84 Q72 75 78 84 M102 84 Q108 75 114 84"
+            fill="none"
+            stroke="#62394f"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+
+          <ellipse cx="65" cy="96" rx="9" ry="5" fill="#edacc2"/>
+          <ellipse cx="115" cy="96" rx="9" ry="5" fill="#edacc2"/>
+
+          <path
+            d="M81 92 Q90 87 99 92 Q90 105 81 92"
+            fill="#e8a16f"
+          />
+
+          <path
+            d="M90 39 Q66 18 68 42 Q72 54 90 43"
+            fill="#df85a5"
+            stroke="#a84c70"
+            stroke-width="2"
+          />
+          <path
+            d="M90 39 Q114 18 112 42 Q108 54 90 43"
+            fill="#df85a5"
+            stroke="#a84c70"
+            stroke-width="2"
+          />
+          <circle cx="90" cy="41" r="6" fill="#a84c70"/>
+        </g>
+      </svg>
+
       <h1>Study Penguin</h1>
-      <p class="subtitle">Track your hours!.</p>
+      <p class="subtitle">
+        A cozy little place to watch your progress grow.
+      </p>
 
       <div class="flower-border" aria-hidden="true">
         <svg class="rose"><use href="#pink-rose"></use></svg>
@@ -403,8 +565,12 @@
           <svg class="rose" aria-hidden="true">
             <use href="#pink-rose"></use>
           </svg>
-          <span id="affirmation">I am worthy of love and respect.</span>
+
+          <span id="affirmation">
+            I am worthy of love and respect.
+          </span>
         </p>
+
         <button
           id="pause-affirmations"
           class="secondary small-button"
@@ -417,15 +583,20 @@
     </header>
 
     <section class="summary" aria-labelledby="weekly-heading">
-      <h2 id="weekly-heading">Your week </h2>
+      <h2 id="weekly-heading">Your week in bloom</h2>
       <p id="week-label" class="hint"></p>
-      <p>Weekly goal: <strong id="goal-label">10 hours</strong></p>
+
+      <p>
+        Weekly goal:
+        <strong id="goal-label">10 hours</strong>
+      </p>
 
       <div class="stats">
         <div class="stat">
           <span>Studied this week</span>
           <strong id="total-time">0h 0m</strong>
         </div>
+
         <div class="stat">
           <span>Left to your goal</span>
           <strong id="remaining-time">10h 0m</strong>
@@ -443,6 +614,7 @@
 
       <details>
         <summary>Change weekly goal</summary>
+
         <form id="goal-form">
           <label for="goal-input">Hours per week</label>
           <input
@@ -456,14 +628,16 @@
           >
           <button type="submit">Save goal</button>
         </form>
+
         <p class="hint">
-          Your goal starts at 10 hours and stays the same unless you change it.
+          Your goal starts at 10 hours and stays the same
+          unless you change it.
         </p>
       </details>
     </section>
 
     <section aria-labelledby="add-heading">
-      <h2 id="add-heading">Add a session</h2>
+      <h2 id="add-heading">Plant a little progress</h2>
 
       <form id="study-form">
         <div class="field">
@@ -484,8 +658,8 @@
         </div>
 
         <p class="hint">
-          Enter a completed session. For study across midnight, add a
-          separate entry for each date.
+          Enter a completed session. End time must be after
+          start time on the same date.
         </p>
 
         <button type="submit">
@@ -517,6 +691,7 @@
       <svg class="rose" aria-hidden="true">
         <use href="#pink-rose"></use>
       </svg>
+
       <p class="hint">
         Saved in this browser on this device.
         Weeks run Monday–Sunday.
@@ -526,6 +701,7 @@
 
   <script>
     // AFFIRMATIONS
+
     const affirmations = [
       "I am worthy of love and respect.",
       "I am enough just as I am.",
@@ -591,6 +767,7 @@
 
     const affirmationText = document.getElementById("affirmation");
     const pauseButton = document.getElementById("pause-affirmations");
+
     let affirmationIndex = Math.floor(Math.random() * affirmations.length);
     let affirmationsPaused = false;
 
@@ -605,13 +782,19 @@
 
     pauseButton.addEventListener("click", () => {
       affirmationsPaused = !affirmationsPaused;
+
       pauseButton.textContent = affirmationsPaused
         ? "Resume affirmations"
         : "Pause affirmations";
-      pauseButton.setAttribute("aria-pressed", String(affirmationsPaused));
+
+      pauseButton.setAttribute(
+        "aria-pressed",
+        String(affirmationsPaused)
+      );
     });
 
     // STUDY TRACKER
+
     const STORAGE_KEY = "study-penguin-sessions";
 
     const studyForm = document.getElementById("study-form");
@@ -628,13 +811,15 @@
     let storageReady = true;
 
     function makeId() {
-      return Date.now().toString(36) + Math.random().toString(36).slice(2);
+      return Date.now().toString(36) +
+        Math.random().toString(36).slice(2);
     }
 
     function dateKey(date) {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
+
       return `${year}-${month}-${day}`;
     }
 
@@ -645,8 +830,11 @@
     function validDate(value) {
       if (typeof value !== "string") return false;
       if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+
       const date = parseDate(value);
-      return !Number.isNaN(date.getTime()) && dateKey(date) === value;
+
+      return !Number.isNaN(date.getTime()) &&
+        dateKey(date) === value;
     }
 
     function validTime(value) {
@@ -674,7 +862,9 @@
     function formatTime(value) {
       const date = new Date();
       const [hours, minutes] = value.split(":").map(Number);
+
       date.setHours(hours, minutes, 0, 0);
+
       return date.toLocaleTimeString(undefined, {
         hour: "numeric",
         minute: "2-digit"
@@ -684,7 +874,9 @@
     function weekBounds() {
       const monday = new Date();
       monday.setHours(0, 0, 0, 0);
-      monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
+      monday.setDate(
+        monday.getDate() - (monday.getDay() + 6) % 7
+      );
 
       const nextMonday = new Date(monday);
       nextMonday.setDate(nextMonday.getDate() + 7);
@@ -700,7 +892,8 @@
     }
 
     function isThisWeek(session, week) {
-      return session.date >= week.start && session.date < week.end;
+      return session.date >= week.start &&
+        session.date < week.end;
     }
 
     function validSession(session) {
@@ -714,15 +907,17 @@
           timeToMinutes(session.end) - timeToMinutes(session.start);
     }
 
-    // Load saved data, including sessions from our earlier version.
+    // Read saved data. Also accept the earlier array-only format.
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
 
       if (raw !== null) {
         const saved = JSON.parse(raw);
+
         const savedSessions = Array.isArray(saved)
           ? saved
           : saved?.sessions;
+
         const savedGoal = Array.isArray(saved)
           ? 600
           : saved?.goalMinutes;
@@ -741,36 +936,43 @@
           ...session,
           id: makeId()
         }));
+
         goalMinutes = savedGoal;
       }
     } catch {
       storageReady = false;
+
       statusText.textContent =
-        "Saved data could not be loaded. Changes are paused to protect it. " +
-        "Check that browser storage is allowed, then reload.";
+        "Saved data could not be loaded. Changes are paused to " +
+        "protect it. Check that browser storage is allowed, then reload.";
 
       studyForm.querySelector("button").disabled = true;
       goalForm.querySelector("button").disabled = true;
       resetButton.disabled = true;
     }
 
-    // Save first, then update the app only if saving succeeded.
+    // Save before changing the displayed data.
     function saveData(nextSessions, nextGoal = goalMinutes) {
       if (!storageReady) return false;
 
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          sessions: nextSessions,
-          goalMinutes: nextGoal
-        }));
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            sessions: nextSessions,
+            goalMinutes: nextGoal
+          })
+        );
 
         sessions = nextSessions;
         goalMinutes = nextGoal;
+
         return true;
       } catch {
         statusText.textContent =
           "Could not save. Browser storage may be full or blocked. " +
           "Your change has not been applied.";
+
         return false;
       }
     }
@@ -794,12 +996,14 @@
         )
         .forEach(session => {
           const item = document.createElement("li");
+
           const info = document.createElement("div");
           info.className = "session-info";
 
           const title = document.createElement("strong");
           title.textContent =
-            `${formatDate(session.date)} · ${formatDuration(session.minutes)}`;
+            `${formatDate(session.date)} · ` +
+            formatDuration(session.minutes);
 
           const times = document.createElement("span");
           times.textContent =
@@ -810,6 +1014,7 @@
           deleteButton.className = "secondary small-button";
           deleteButton.textContent = "Delete";
           deleteButton.disabled = !storageReady;
+
           deleteButton.setAttribute(
             "aria-label",
             `Delete session on ${formatDate(session.date)} ` +
@@ -819,7 +1024,9 @@
           deleteButton.addEventListener("click", () => {
             if (!confirm("Delete this study session?")) return;
 
-            const remaining = sessions.filter(entry => entry.id !== session.id);
+            const remaining = sessions.filter(
+              entry => entry.id !== session.id
+            );
 
             if (saveData(remaining)) {
               render();
@@ -835,13 +1042,20 @@
 
     function render() {
       const week = weekBounds();
-      const weeklySessions = sessions.filter(session =>
-        isThisWeek(session, week)
+
+      const weeklySessions = sessions.filter(
+        session => isThisWeek(session, week)
       );
-      const pastSessions = sessions.filter(session => session.date < week.start);
+
+      const pastSessions = sessions.filter(
+        session => session.date < week.start
+      );
+
       const total = weeklySessions.reduce(
-        (sum, session) => sum + session.minutes, 0
+        (sum, session) => sum + session.minutes,
+        0
       );
+
       const remaining = Math.max(0, goalMinutes - total);
       const progressBar = document.getElementById("goal-progress");
 
@@ -859,9 +1073,11 @@
 
       progressBar.max = goalMinutes;
       progressBar.value = Math.min(total, goalMinutes);
+
       progressBar.setAttribute(
         "aria-valuetext",
-        `${formatDuration(total)} studied toward ${formatDuration(goalMinutes)}`
+        `${formatDuration(total)} studied toward ` +
+        formatDuration(goalMinutes)
       );
 
       const message = document.getElementById("goal-message");
@@ -869,14 +1085,16 @@
       if (total > goalMinutes) {
         message.textContent =
           `Goal reached! ${formatDuration(total - goalMinutes)} extra. ` +
-          "Your penguin is proud of you! 🐧";
+          "Your penguin is doing a happy dance!";
       } else if (total === goalMinutes) {
         message.textContent =
-          "You did it! Your weekly goal is in full bloom. 🐧";
+          "You did it! Your weekly goal is in full bloom.";
       } else if (total > 0) {
-        message.textContent = "Keep it up!";
+        message.textContent =
+          "Your effort is adding up, one session at a time.";
       } else {
-        message.textContent = "A fresh week. Start with one little session.";
+        message.textContent =
+          "A fresh week. Start with one little session.";
       }
 
       dateInput.max = dateKey(new Date());
@@ -897,6 +1115,7 @@
     dateInput.value = dateKey(new Date());
     goalInput.value = goalMinutes / 60;
 
+    // Add a completed study session.
     studyForm.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -904,14 +1123,29 @@
       const start = startInput.value;
       const end = endInput.value;
 
-      if (!validDate(date) || !validTime(start) || !validTime(end)) {
-        statusText.textContent = "Please enter a valid date and both times.";
+      if (
+        !validDate(date) ||
+        !validTime(start) ||
+        !validTime(end)
+      ) {
+        statusText.textContent =
+          "Please enter a valid date and both times.";
+        return;
+      }
+
+      const minutes =
+        timeToMinutes(end) - timeToMinutes(start);
+
+      if (minutes <= 0) {
+        statusText.textContent =
+          "End time must be after start time on the same date.";
         return;
       }
 
       const today = dateKey(new Date());
       const now = new Date();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      const currentMinutes =
+        now.getHours() * 60 + now.getMinutes();
 
       if (
         date > today ||
@@ -919,15 +1153,6 @@
       ) {
         statusText.textContent =
           "Please add the session after you have finished studying.";
-        return;
-      }
-
-      const minutes = timeToMinutes(end) - timeToMinutes(start);
-
-      if (minutes <= 0) {
-        statusText.textContent =
-          "End time must be after start time. " +
-          "Split sessions across midnight into separate dates.";
         return;
       }
 
@@ -939,7 +1164,8 @@
 
       if (overlaps) {
         statusText.textContent =
-          "This overlaps a saved session. Check the times to avoid counting twice.";
+          "This overlaps a saved session. Check the times " +
+          "to avoid counting twice.";
         return;
       }
 
@@ -955,11 +1181,13 @@
         render();
         startInput.value = "";
         endInput.value = "";
+
         statusText.textContent =
           `Saved ${formatDuration(minutes)} for ${formatDate(date)}.`;
       }
     });
 
+    // Change the goal only when the user saves a new one.
     goalForm.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -973,43 +1201,52 @@
         nextGoal % 15 !== 0
       ) {
         statusText.textContent =
-          "Choose a goal from 0.25 to 168 hours, in quarter-hour steps.";
+          "Choose a goal from 0.25 to 168 hours, " +
+          "in quarter-hour steps.";
         return;
       }
 
       if (saveData(sessions, nextGoal)) {
         render();
-        statusText.textContent = `Weekly goal saved: ${hours} hours.`;
+        statusText.textContent =
+          `Weekly goal saved: ${hours} hours.`;
       }
     });
 
+    // Reset only this week's sessions.
     resetButton.addEventListener("click", () => {
       const week = weekBounds();
-      const weeklySessions = sessions.filter(session =>
-        isThisWeek(session, week)
+
+      const weeklySessions = sessions.filter(
+        session => isThisWeek(session, week)
       );
 
       if (weeklySessions.length === 0) {
-        statusText.textContent = "There are no sessions to reset this week.";
+        statusText.textContent =
+          "There are no sessions to reset this week.";
         return;
       }
 
       if (!confirm(
         "Delete all of this week's sessions? " +
-        "Past weeks and your goal will be kept. This cannot be undone."
+        "Past weeks and your goal will be kept. " +
+        "This cannot be undone."
       )) {
         return;
       }
 
-      const remaining = sessions.filter(session => !isThisWeek(session, week));
+      const remaining = sessions.filter(
+        session => !isThisWeek(session, week)
+      );
 
       if (saveData(remaining)) {
         render();
-        statusText.textContent = "This week has been reset. A fresh start!";
+        statusText.textContent =
+          "This week has been reset. A fresh start!";
       }
     });
 
-    // Refresh the displayed week if the page stays open overnight.
+    // Keep the displayed week current if the page stays open.
     setInterval(render, 60000);
     window.addEventListener("focus", render);
 
